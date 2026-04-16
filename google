@@ -1,0 +1,43 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+# Open Edge browser
+driver = webdriver.Edge()
+
+# Open Google
+driver.get("https://www.google.com")
+
+time.sleep(2)
+
+# 1. Search box
+search_box = driver.find_element(By.NAME, "q")
+print("Search box displayed:", search_box.is_displayed())
+
+# 2. Google Apps button (grid icon)
+apps_button = driver.find_element(By.XPATH, "//a[@aria-label='Google apps']")
+print("Google Apps button displayed:", apps_button.is_displayed())
+
+# 3. Sign In button
+sign_in = driver.find_element(By.XPATH, "//a[contains(text(),'Sign in')]")
+print("Sign In button displayed:", sign_in.is_displayed())
+
+# 4. Footer links
+footer_links = driver.find_elements(By.XPATH, "//footer//a")
+print("Total footer links:", len(footer_links))
+
+for link in footer_links:
+    print("Footer link:", link.text)
+
+# 5. Perform search
+search_box.send_keys("Selenium testing")
+time.sleep(2)
+
+driver.find_element(By.NAME, "btnK").click()
+time.sleep(3)
+
+# Print title
+print("Page Title:", driver.title)
+
+# Close browser
+driver.quit()
