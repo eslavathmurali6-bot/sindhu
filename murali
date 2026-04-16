@@ -1,0 +1,38 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+# Open Edge
+driver = webdriver.Edge()
+
+# Open Google
+driver.get("https://www.google.com")
+
+time.sleep(3)
+
+# Search box
+search_box = driver.find_element(By.NAME, "q")
+print("Search box:", search_box.is_displayed())
+
+# Google Apps button
+apps = driver.find_element(By.XPATH, "//a[@aria-label='Google apps']")
+print("Apps button:", apps.is_displayed())
+
+# ✅ FIXED Sign In button (stable locator)
+sign_in = driver.find_element(By.XPATH, "//a[@aria-label='Sign in']")
+print("Sign in button:", sign_in.is_displayed())
+
+# Footer links
+footer_links = driver.find_elements(By.XPATH, "//footer//a")
+print("Footer links:", len(footer_links))
+
+# Search action
+search_box.send_keys("Selenium testing")
+time.sleep(2)
+
+driver.find_element(By.NAME, "btnK").click()
+time.sleep(3)
+
+print("Title:", driver.title)
+
+driver.quit()
